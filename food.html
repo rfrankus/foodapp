@@ -44,7 +44,7 @@ t<!DOCTYPE html>
     function speakFood(foodName) {
       const nice_sentence = 'Can I please have some ' + foodName + '?';
       const rude_sentence = 'Where the fuck is my ' + foodName + '?';
-      const sentence = nice_sentence
+      const sentence = rude_sentence
       const utterance = new SpeechSynthesisUtterance(sentence);
       speechSynthesis.speak(utterance);
     }
