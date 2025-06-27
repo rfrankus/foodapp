@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Food Speaker</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive;
+      background-color: #f0f8ff;
+      text-align: center;
+      padding: 40px;
+    }
+    h1 {
+      color: #ff69b4;
+      font-size: 40px;
+    }
+    .food-button {
+      font-size: 24px;
+      margin: 10px;
+      padding: 20px 40px;
+      background-color: #ffe4e1;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .food-button:hover {
+      background-color: #ffdab9;
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <h1>🍧 Food Speaker Deluxe 🍹</h1>
+
+  <button class="food-button" onclick="speakFood('Water')">💧 Water</button>
+  <button class="food-button" onclick="speakFood('Ice Cream')">🍦 Ice Cream</button>
+  <button class="food-button" onclick="speakFood('Protein Shake')">🥤 Protein Shake</button>
+  <button class="food-button" onclick="speakFood('Whip Cream')">🍨 Whip Cream</button>
+  <button class="food-button" onclick="speakFood('Yogurt')">🥣 Yogurt</button>
+  <button class="food-button" onclick="speakFood('Smoothie')">🫐 Smoothie</button>
+
+  <script>
+    function speakFood(foodName) {
+      const utterance = new SpeechSynthesisUtterance(foodName);
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+</body>
+</html>
