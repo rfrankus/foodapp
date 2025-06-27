@@ -83,12 +83,12 @@
     </div>
     
     <div class="language-section">
-      <strong title="Arabic Language - العربية">🇸🇦 Arabic:</strong>
+      <strong title="Lebanese Language - اللبنانية">🇱🇧 Lebanese:</strong>
       <label>
-        <input type="radio" name="language" value="arabic-nice"> 😊 مهذب
+        <input type="radio" name="language" value="lebanese-nice"> 😊 مهذب
       </label>
       <label>
-        <input type="radio" name="language" value="arabic-rude"> 😠 وقح
+        <input type="radio" name="language" value="lebanese-rude"> 😠 وقح
       </label>
     </div>
   </div>
@@ -101,6 +101,8 @@
   <button class="food-button" onclick="speakFood('Yogurt')">🥣 Yogurt</button>
   <button class="food-button" onclick="speakFood('Smoothie')">🫐 Smoothie</button>
   <button class="food-button" onclick="speakFood('Chocolate Pudding')">🍫 Chocolate Pudding</button>
+  <button class="food-button" onclick="speakFood('Medicine')">💊 Medicine</button>
+  <button class="food-button" onclick="speakFood('Tequila')">🍹 Tequila</button>
 
   <script>
     // Check available voices when page loads
@@ -115,12 +117,13 @@
       
       const arabicVoices = voices.filter(voice => 
         voice.lang.startsWith('ar') || 
-        voice.name.toLowerCase().includes('arabic')
+        voice.name.toLowerCase().includes('arabic') ||
+        voice.name.toLowerCase().includes('lebanese')
       );
-      console.log('Arabic voices found:', arabicVoices);
+      console.log('Arabic/Lebanese voices found:', arabicVoices);
       
       if (arabicVoices.length === 0) {
-        console.warn('No Arabic voices available on this device/browser');
+        console.warn('No Arabic/Lebanese voices available on this device/browser');
         // You could show a warning to the user here
       }
     }
@@ -130,14 +133,16 @@
       
       // Food translations
       const foodTranslations = {
-        'Water': { german: 'Wasser', arabic: 'ماء' },
-        'Butter': { german: 'Butter', arabic: 'زبدة' },
-        'Ice Cream': { german: 'Eis', arabic: 'آيس كريم' },
-        'Protein Shake': { german: 'Protein-Shake', arabic: 'مخفوق البروتين' },
-        'Whip Cream': { german: 'Schlagsahne', arabic: 'كريمة مخفوقة' },
-        'Yogurt': { german: 'Joghurt', arabic: 'زبادي' },
-        'Smoothie': { german: 'Smoothie', arabic: 'عصير مخلوط' },
-        'Chocolate Pudding': { german: 'Schokoladenpudding', arabic: 'بودنغ الشوكولاتة' }
+        'Water': { german: 'Wasser', lebanese: 'مي' },
+        'Butter': { german: 'Butter', lebanese: 'زبدة' },
+        'Ice Cream': { german: 'Eis', lebanese: 'بوظة' },
+        'Protein Shake': { german: 'Protein-Shake', lebanese: 'شيك بروتين' },
+        'Whip Cream': { german: 'Schlagsahne', lebanese: 'كريمة مخفوقة' },
+        'Yogurt': { german: 'Joghurt', lebanese: 'لبن' },
+        'Smoothie': { german: 'Smoothie', lebanese: 'سموذي' },
+        'Chocolate Pudding': { german: 'Schokoladenpudding', lebanese: 'مهلبية شوكولا' },
+        'Medicine': { german: 'Medizin', lebanese: 'دوا' },
+        'Tequila': { german: 'Tequila', lebanese: 'تيكيلا' }
       };
       
       let sentence;
@@ -160,13 +165,13 @@
           sentence = 'Wo zum Teufel ist mein ' + foodTranslations[foodName].german + '?';
           lang = 'de-DE';
           break;
-        case 'arabic-nice':
-          sentence = 'هل يمكنني الحصول على ' + foodTranslations[foodName].arabic + ' من فضلك؟';
-          lang = 'ar-SA';
+        case 'lebanese-nice':
+          sentence = 'فيني آخد شوية ' + foodTranslations[foodName].lebanese + ' لو سمحت؟';
+          lang = 'ar-LB';
           break;
-        case 'arabic-rude':
-          sentence = 'أين ' + foodTranslations[foodName].arabic + ' اللعين؟';
-          lang = 'ar-SA';
+        case 'lebanese-rude':
+          sentence = 'وين ' + foodTranslations[foodName].lebanese + ' تبع الله؟';
+          lang = 'ar-LB';
           break;
         default:
           sentence = 'Can I please have some ' + foodName + '?';
