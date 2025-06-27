@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Food Speaker for Tonsil Surgery</title>
+  <title>Food Speaker for Mouth & Nose Surgeries</title>
   <style>
     body {
       font-family: 'Comic Sans MS', cursive;
@@ -67,6 +67,7 @@
 
   <script>
     function speakFood(foodName) {
+<<<<<<< HEAD
       const languageChoice = document.querySelector('input[name="language"]:checked').value;
       
       let sentence;
@@ -76,6 +77,11 @@
         sentence = 'Where the fuck is my ' + foodName + '?';
       }
       
+=======
+      const nice_sentence = 'Can I please have some ' + foodName + '?';
+      const rude_sentence = 'Where the fuck is my ' + foodName + '?';
+      const sentence = rude_sentence
+>>>>>>> e654d74 (Merssage)
       const utterance = new SpeechSynthesisUtterance(sentence);
       speechSynthesis.speak(utterance);
     }
