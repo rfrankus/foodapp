@@ -42,9 +42,9 @@ t<!DOCTYPE html>
 
   <script>
     function speakFood(foodName) {
-      const sentance = 'Where the fuck is my ';
-      const utterance = new SpeechSynthesisUtterance(foodName);
-      speechSynthesis.speak(sentance + utterance);
+      const sentence = 'Where the fuck is my ' + foodName + '?';
+      const utterance = new SpeechSynthesisUtterance(sentence);
+      speechSynthesis.speak(utterance);
     }
   </script>
 </body>
