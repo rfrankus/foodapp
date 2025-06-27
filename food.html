@@ -75,20 +75,20 @@
     <div class="language-section">
       <strong>🇩🇪 German:</strong>
       <label>
-        <input type="radio" name="language" value="german-nice"> 😊 Nice
+        <input type="radio" name="language" value="german-nice"> 😊 Höflich
       </label>
       <label>
-        <input type="radio" name="language" value="german-rude"> 😠 Rude
+        <input type="radio" name="language" value="german-rude"> 😠 Unhöflich
       </label>
     </div>
     
     <div class="language-section">
       <strong>🇸🇦 Arabic:</strong>
       <label>
-        <input type="radio" name="language" value="arabic-nice"> 😊 Nice
+        <input type="radio" name="language" value="arabic-nice"> 😊 مهذب
       </label>
       <label>
-        <input type="radio" name="language" value="arabic-rude"> 😠 Rude
+        <input type="radio" name="language" value="arabic-rude"> 😠 وقح
       </label>
     </div>
   </div>
@@ -102,6 +102,28 @@
   <button class="food-button" onclick="speakFood('Smoothie')">🫐 Smoothie</button>
 
   <script>
+    // Check available voices when page loads
+    window.addEventListener('load', function() {
+      // Wait a bit for voices to load
+      setTimeout(checkVoices, 100);
+    });
+
+    function checkVoices() {
+      const voices = speechSynthesis.getVoices();
+      console.log('Available voices:', voices);
+      
+      const arabicVoices = voices.filter(voice => 
+        voice.lang.startsWith('ar') || 
+        voice.name.toLowerCase().includes('arabic')
+      );
+      console.log('Arabic voices found:', arabicVoices);
+      
+      if (arabicVoices.length === 0) {
+        console.warn('No Arabic voices available on this device/browser');
+        // You could show a warning to the user here
+      }
+    }
+
     function speakFood(foodName) {
       const languageChoice = document.querySelector('input[name="language"]:checked').value;
       
@@ -149,8 +171,52 @@
           lang = 'en-US';
       }
       
+      console.log('Attempting to speak:', sentence, 'in language:', lang);
+      
       const utterance = new SpeechSynthesisUtterance(sentence);
       utterance.lang = lang;
+      
+      // Try to find the best voice for the language
+      const voices = speechSynthesis.getVoices();
+      const targetVoice = voices.find(voice => voice.lang === lang) || 
+                         voices.find(voice => voice.lang.startsWith(lang.split('-')[0]));
+      
+      if (targetVoice) {
+        utterance.voice = targetVoice;
+        console.log('Using voice:', targetVoice.name, targetVoice.lang);
+      } else {
+        console.warn('No suitable voice found for', lang);
+        // For Arabic, try alternative language codes
+        if (lang.startsWith('ar')) {
+          const arabicVoice = voices.find(voice => 
+            voice.lang.includes('ar') || 
+            voice.name.toLowerCase().includes('arabic')
+          );
+          if (arabicVoice) {
+            utterance.voice = arabicVoice;
+            console.log('Using alternative Arabic voice:', arabicVoice.name);
+          } else {
+            // Fallback: speak in English but show Arabic text
+            console.log('No Arabic voice available, falling back to English pronunciation');
+            utterance.lang = 'en-US';
+          }
+        }
+      }
+      
+      // Add error handling
+      utterance.onerror = function(event) {
+        console.error('Speech synthesis error:', event.error);
+        alert('Speech synthesis failed: ' + event.error);
+      };
+      
+      utterance.onstart = function() {
+        console.log('Speech started');
+      };
+      
+      utterance.onend = function() {
+        console.log('Speech ended');
+      };
+      
       speechSynthesis.speak(utterance);
     }
   </script>
