@@ -1,4 +1,4 @@
-t<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
   <title>Food Speaker</title>
@@ -12,6 +12,22 @@ t<!DOCTYPE html>
     h1 {
       color: #ff69b4;
       font-size: 40px;
+    }
+    .language-choice {
+      margin: 20px 0;
+      padding: 15px;
+      background-color: #fff;
+      border-radius: 10px;
+      display: inline-block;
+    }
+    .language-choice label {
+      margin: 0 15px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    .language-choice input[type="radio"] {
+      margin-right: 5px;
+      transform: scale(1.2);
     }
     .food-button {
       font-size: 24px;
@@ -30,7 +46,16 @@ t<!DOCTYPE html>
   </style>
 </head>
 <body>
-  <h1>🍧 Food Speaker Deluxe post surgery 🍹</h1>
+  <h1>🍧 Food Speaker Deluxe 🍹</h1>
+
+  <div class="language-choice">
+    <label>
+      <input type="radio" name="language" value="nice" checked> 😊 Nice
+    </label>
+    <label>
+      <input type="radio" name="language" value="rude"> 😠 Rude
+    </label>
+  </div>
 
   <button class="food-button" onclick="speakFood('Water')">💧 Water</button>
   <button class="food-button" onclick="speakFood('Butter')">💧 Butter</button>
@@ -42,9 +67,15 @@ t<!DOCTYPE html>
 
   <script>
     function speakFood(foodName) {
-      const nice_sentence = 'Can I please have some ' + foodName + '?';
-      const rude_sentence = 'Where the fuck is my ' + foodName + '?';
-      const sentence = rude_sentence
+      const languageChoice = document.querySelector('input[name="language"]:checked').value;
+      
+      let sentence;
+      if (languageChoice === 'nice') {
+        sentence = 'Can I please have some ' + foodName + '?';
+      } else {
+        sentence = 'Where the fuck is my ' + foodName + '?';
+      }
+      
       const utterance = new SpeechSynthesisUtterance(sentence);
       speechSynthesis.speak(utterance);
     }
