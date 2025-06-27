@@ -20,14 +20,25 @@
       border-radius: 10px;
       display: inline-block;
     }
+    .language-choice h3 {
+      margin: 0 0 10px 0;
+      color: #333;
+    }
+    .language-section {
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
     .language-choice label {
-      margin: 0 15px;
-      font-size: 18px;
+      margin: 0 10px;
+      font-size: 16px;
       cursor: pointer;
     }
     .language-choice input[type="radio"] {
       margin-right: 5px;
-      transform: scale(1.2);
+      transform: scale(1.1);
     }
     .food-button {
       font-size: 24px;
@@ -49,12 +60,37 @@
   <h1>🍧 Food Speaker Deluxe 🍹</h1>
 
   <div class="language-choice">
-    <label>
-      <input type="radio" name="language" value="nice" checked> 😊 Nice
-    </label>
-    <label>
-      <input type="radio" name="language" value="rude"> 😠 Rude
-    </label>
+    <h3>Choose Language & Tone:</h3>
+    
+    <div class="language-section">
+      <strong>🇺🇸 English:</strong>
+      <label>
+        <input type="radio" name="language" value="english-nice" checked> 😊 Nice
+      </label>
+      <label>
+        <input type="radio" name="language" value="english-rude"> 😠 Rude
+      </label>
+    </div>
+    
+    <div class="language-section">
+      <strong>🇩🇪 German:</strong>
+      <label>
+        <input type="radio" name="language" value="german-nice"> 😊 Nice
+      </label>
+      <label>
+        <input type="radio" name="language" value="german-rude"> 😠 Rude
+      </label>
+    </div>
+    
+    <div class="language-section">
+      <strong>🇸🇦 Arabic:</strong>
+      <label>
+        <input type="radio" name="language" value="arabic-nice"> 😊 Nice
+      </label>
+      <label>
+        <input type="radio" name="language" value="arabic-rude"> 😠 Rude
+      </label>
+    </div>
   </div>
 
   <button class="food-button" onclick="speakFood('Water')">💧 Water</button>
@@ -69,13 +105,52 @@
     function speakFood(foodName) {
       const languageChoice = document.querySelector('input[name="language"]:checked').value;
       
+      // Food translations
+      const foodTranslations = {
+        'Water': { german: 'Wasser', arabic: 'ماء' },
+        'Butter': { german: 'Butter', arabic: 'زبدة' },
+        'Ice Cream': { german: 'Eis', arabic: 'آيس كريم' },
+        'Protein Shake': { german: 'Protein-Shake', arabic: 'مخفوق البروتين' },
+        'Whip Cream': { german: 'Schlagsahne', arabic: 'كريمة مخفوقة' },
+        'Yogurt': { german: 'Joghurt', arabic: 'زبادي' },
+        'Smoothie': { german: 'Smoothie', arabic: 'عصير مخلوط' }
+      };
+      
       let sentence;
-      if (languageChoice === 'nice') {
-        sentence = 'Can I please have some ' + foodName + '?';
-      } else {
-        sentence = 'Where the fuck is my ' + foodName + '?';
+      let lang = 'en-US'; // Default language for speech synthesis
+      
+      switch(languageChoice) {
+        case 'english-nice':
+          sentence = 'Can I please have some ' + foodName + '?';
+          lang = 'en-US';
+          break;
+        case 'english-rude':
+          sentence = 'Where the fuck is my ' + foodName + '?';
+          lang = 'en-US';
+          break;
+        case 'german-nice':
+          sentence = 'Kann ich bitte etwas ' + foodTranslations[foodName].german + ' haben?';
+          lang = 'de-DE';
+          break;
+        case 'german-rude':
+          sentence = 'Wo zum Teufel ist mein ' + foodTranslations[foodName].german + '?';
+          lang = 'de-DE';
+          break;
+        case 'arabic-nice':
+          sentence = 'هل يمكنني الحصول على ' + foodTranslations[foodName].arabic + ' من فضلك؟';
+          lang = 'ar-SA';
+          break;
+        case 'arabic-rude':
+          sentence = 'أين ' + foodTranslations[foodName].arabic + ' اللعين؟';
+          lang = 'ar-SA';
+          break;
+        default:
+          sentence = 'Can I please have some ' + foodName + '?';
+          lang = 'en-US';
       }
+      
       const utterance = new SpeechSynthesisUtterance(sentence);
+      utterance.lang = lang;
       speechSynthesis.speak(utterance);
     }
   </script>
