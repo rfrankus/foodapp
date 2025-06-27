@@ -32,7 +32,7 @@ t<!DOCTYPE html>
 <body>
   <h1>🍧 Food Speaker Deluxe 🍹</h1>
 
-  <button class="food-button" onclick="speakFood('Where the fuck is my Water')">💧 Water</button>
+  <button class="food-button" onclick="speakFood('Water')">💧 Water</button>
   <button class="food-button" onclick="speakFood('Butter')">💧 Butter</button>
   <button class="food-button" onclick="speakFood('Ice Cream')">🍦 Ice Cream</button>
   <button class="food-button" onclick="speakFood('Protein Shake')">🥤 Protein Shake</button>
@@ -42,8 +42,9 @@ t<!DOCTYPE html>
 
   <script>
     function speakFood(foodName) {
+      const sentance = 'Where the fuck is my ';
       const utterance = new SpeechSynthesisUtterance(foodName);
-      speechSynthesis.speak(utterance);
+      speechSynthesis.speak(sentance + utterance);
     }
   </script>
 </body>
