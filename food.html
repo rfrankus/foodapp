@@ -57,7 +57,7 @@
   </style>
 </head>
 <body>
-  <h1>🍧 Food Speaker Deluxe 🍹</h1>
+  <h1>🍧 Food Speaker Deluxe 🍹</h1> 
 
   <div class="language-choice">
     <h3>Choose Language & Tone:</h3>
@@ -91,6 +91,36 @@
         <input type="radio" name="language" value="lebanese-rude"> 😠 وقح
       </label>
     </div>
+    
+    <div class="language-section">
+      <strong title="French Language - Français">🇫🇷 French:</strong>
+      <label>
+        <input type="radio" name="language" value="french-nice"> 😊 Poli
+      </label>
+      <label>
+        <input type="radio" name="language" value="french-rude"> 😠 Grossier
+      </label>
+    </div>
+    
+    <div class="language-section">
+      <strong title="Spanish Language - Español">🇪🇸 Spanish:</strong>
+      <label>
+        <input type="radio" name="language" value="spanish-nice"> 😊 Cortés
+      </label>
+      <label>
+        <input type="radio" name="language" value="spanish-rude"> 😠 Grosero
+      </label>
+    </div>
+    
+    <div class="language-section">
+      <strong title="Japanese Language - 日本語">🇯🇵 Japanese:</strong>
+      <label>
+        <input type="radio" name="language" value="japanese-nice"> 😊 丁寧
+      </label>
+      <label>
+        <input type="radio" name="language" value="japanese-rude"> 😠 失礼
+      </label>
+    </div>
   </div>
 
   <button class="food-button" onclick="speakFood('Water')">💧 Water</button>
@@ -103,6 +133,8 @@
   <button class="food-button" onclick="speakFood('Chocolate Pudding')">🍫 Chocolate Pudding</button>
   <button class="food-button" onclick="speakFood('Medicine')">💊 Medicine</button>
   <button class="food-button" onclick="speakFood('Tequila')">🍹 Tequila</button>
+  <button class="food-button" onclick="speakFood('Mashed Potatoes')">🥔 Mashed Potatoes</button>
+  <button class="food-button" onclick="speakFood('Yakult')">🥛 Yakult</button>
 
   <script>
     // Check available voices when page loads
@@ -115,17 +147,33 @@
       const voices = speechSynthesis.getVoices();
       console.log('Available voices:', voices);
       
-      const arabicVoices = voices.filter(voice => 
-        voice.lang.startsWith('ar') || 
-        voice.name.toLowerCase().includes('arabic') ||
-        voice.name.toLowerCase().includes('lebanese')
-      );
-      console.log('Arabic/Lebanese voices found:', arabicVoices);
+      const languageVoices = {
+        arabic: voices.filter(voice => 
+          voice.lang.startsWith('ar') || 
+          voice.name.toLowerCase().includes('arabic') ||
+          voice.name.toLowerCase().includes('lebanese')
+        ),
+        french: voices.filter(voice => 
+          voice.lang.startsWith('fr') || 
+          voice.name.toLowerCase().includes('french')
+        ),
+        spanish: voices.filter(voice => 
+          voice.lang.startsWith('es') || 
+          voice.name.toLowerCase().includes('spanish')
+        ),
+        japanese: voices.filter(voice => 
+          voice.lang.startsWith('ja') || 
+          voice.name.toLowerCase().includes('japanese')
+        )
+      };
       
-      if (arabicVoices.length === 0) {
-        console.warn('No Arabic/Lebanese voices available on this device/browser');
-        // You could show a warning to the user here
-      }
+      console.log('Available voices by language:', languageVoices);
+      
+      Object.keys(languageVoices).forEach(lang => {
+        if (languageVoices[lang].length === 0) {
+          console.warn(`No ${lang} voices available on this device/browser`);
+        }
+      });
     }
 
     function speakFood(foodName) {
@@ -133,16 +181,18 @@
       
       // Food translations
       const foodTranslations = {
-        'Water': { german: 'Wasser', lebanese: 'مي' },
-        'Butter': { german: 'Butter', lebanese: 'زبدة' },
-        'Ice Cream': { german: 'Eis', lebanese: 'بوظة' },
-        'Protein Shake': { german: 'Protein-Shake', lebanese: 'شيك بروتين' },
-        'Whip Cream': { german: 'Schlagsahne', lebanese: 'كريمة مخفوقة' },
-        'Yogurt': { german: 'Joghurt', lebanese: 'لبن' },
-        'Smoothie': { german: 'Smoothie', lebanese: 'سموذي' },
-        'Chocolate Pudding': { german: 'Schokoladenpudding', lebanese: 'مهلبية شوكولا' },
-        'Medicine': { german: 'Medizin', lebanese: 'دوا' },
-        'Tequila': { german: 'Tequila', lebanese: 'تيكيلا' }
+        'Water': { german: 'Wasser', lebanese: 'مي', french: 'Eau', spanish: 'Agua', japanese: '水' },
+        'Butter': { german: 'Butter', lebanese: 'زبدة', french: 'Beurre', spanish: 'Mantequilla', japanese: 'バター' },
+        'Ice Cream': { german: 'Eis', lebanese: 'بوظة', french: 'Glace', spanish: 'Helado', japanese: 'アイスクリーム' },
+        'Protein Shake': { german: 'Protein-Shake', lebanese: 'شيك بروتين', french: 'Shake Protéiné', spanish: 'Batido de Proteína', japanese: 'プロテインシェイク' },
+        'Whip Cream': { german: 'Schlagsahne', lebanese: 'كريمة مخفوقة', french: 'Crème Fouettée', spanish: 'Crema Batida', japanese: 'ホイップクリーム' },
+        'Yogurt': { german: 'Joghurt', lebanese: 'لبن', french: 'Yaourt', spanish: 'Yogur', japanese: 'ヨーグルト' },
+        'Smoothie': { german: 'Smoothie', lebanese: 'سموذي', french: 'Smoothie', spanish: 'Batido', japanese: 'スムージー' },
+        'Chocolate Pudding': { german: 'Schokoladenpudding', lebanese: 'مهلبية شوكولا', french: 'Pudding au Chocolat', spanish: 'Pudín de Chocolate', japanese: 'チョコレートプリン' },
+        'Medicine': { german: 'Medizin', lebanese: 'دوا', french: 'Médicament', spanish: 'Medicina', japanese: '薬' },
+        'Tequila': { german: 'Tequila', lebanese: 'تيكيلا', french: 'Tequila', spanish: 'Tequila', japanese: 'テキーラ' },
+        'Mashed Potatoes': { german: 'Kartoffelpüree', lebanese: 'بطاطا مهروسة', french: 'Purée de Pommes de Terre', spanish: 'Puré de Papas', japanese: 'マッシュポテト' },
+        'Yakult': { german: 'Yakult', lebanese: 'ياكولت', french: 'Yakult', spanish: 'Yakult', japanese: 'ヤクルト' }
       };
       
       let sentence;
@@ -172,6 +222,30 @@
         case 'lebanese-rude':
           sentence = 'وين ' + foodTranslations[foodName].lebanese + ' تبع الله؟';
           lang = 'ar-LB';
+          break;
+        case 'french-nice':
+          sentence = 'Puis-je avoir ' + foodTranslations[foodName].french + ' s\'il vous plaît?';
+          lang = 'fr-FR';
+          break;
+        case 'french-rude':
+          sentence = 'Où est mon putain de ' + foodTranslations[foodName].french + '?';
+          lang = 'fr-FR';
+          break;
+        case 'spanish-nice':
+          sentence = '¿Puedo tener ' + foodTranslations[foodName].spanish + ' por favor?';
+          lang = 'es-ES';
+          break;
+        case 'spanish-rude':
+          sentence = '¿Dónde coño está mi ' + foodTranslations[foodName].spanish + '?';
+          lang = 'es-ES';
+          break;
+        case 'japanese-nice':
+          sentence = foodTranslations[foodName].japanese + 'をください。';
+          lang = 'ja-JP';
+          break;
+        case 'japanese-rude':
+          sentence = foodTranslations[foodName].japanese + 'はどこだ？';
+          lang = 'ja-JP';
           break;
         default:
           sentence = 'Can I please have some ' + foodName + '?';
