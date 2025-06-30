@@ -74,6 +74,9 @@
         <input type="radio" name="language" value="english-silly"> 🤪 Silly
       </label>
       <label>
+        <input type="radio" name="language" value="english-apologetic"> 👑 Apologetic
+      </label>
+      <label>
         <input type="radio" name="language" value="english-rude"> 😠 Rude
       </label>
     </div>
@@ -88,6 +91,9 @@
       </label>
       <label>
         <input type="radio" name="language" value="german-silly"> 🤪 Albern
+      </label>
+      <label>
+        <input type="radio" name="language" value="german-apologetic"> 👑 Entschuldigend
       </label>
       <label>
         <input type="radio" name="language" value="german-rude"> 😠 Unhöflich
@@ -106,6 +112,9 @@
         <input type="radio" name="language" value="lebanese-silly"> 🤪 مضحك
       </label>
       <label>
+        <input type="radio" name="language" value="lebanese-apologetic"> 👑 معتذر
+      </label>
+      <label>
         <input type="radio" name="language" value="lebanese-rude"> 😠 وقح
       </label>
     </div>
@@ -120,6 +129,9 @@
       </label>
       <label>
         <input type="radio" name="language" value="french-silly"> 🤪 Rigolo
+      </label>
+      <label>
+        <input type="radio" name="language" value="french-apologetic"> 👑 Désolé
       </label>
       <label>
         <input type="radio" name="language" value="french-rude"> 😠 Grossier
@@ -138,6 +150,9 @@
         <input type="radio" name="language" value="spanish-silly"> 🤪 Tonto
       </label>
       <label>
+        <input type="radio" name="language" value="spanish-apologetic"> 👑 Disculpas
+      </label>
+      <label>
         <input type="radio" name="language" value="spanish-rude"> 😠 Grosero
       </label>
     </div>
@@ -152,6 +167,9 @@
       </label>
       <label>
         <input type="radio" name="language" value="japanese-silly"> 🤪 おかしい
+      </label>
+      <label>
+        <input type="radio" name="language" value="japanese-apologetic"> 👑 謝罪
       </label>
       <label>
         <input type="radio" name="language" value="japanese-rude"> 😠 失礼
@@ -247,6 +265,10 @@
           sentence = 'Pretty please with a cherry on top, can I have some yummy ' + foodName + '? Pleeeease!';
           lang = 'en-US';
           break;
+        case 'english-apologetic':
+          sentence = 'Your Majesty, I humbly apologize for this intrusion, but might I dare request some ' + foodName + ' if it pleases the crown?';
+          lang = 'en-US';
+          break;
         case 'english-rude':
           sentence = 'Where the fuck is my ' + foodName + '?';
           lang = 'en-US';
@@ -261,6 +283,10 @@
           break;
         case 'german-silly':
           sentence = 'Ich hätte gerne etwas leckeres ' + foodTranslations[foodName].german + ', bitte bitte bitte!';
+          lang = 'de-DE';
+          break;
+        case 'german-apologetic':
+          sentence = 'Eure Majestät, ich bitte demütigst um Verzeihung und wage zu erbitten etwas ' + foodTranslations[foodName].german + ', falls es der Krone gefällt.';
           lang = 'de-DE';
           break;
         case 'german-rude':
@@ -279,6 +305,10 @@
           sentence = 'يا ريت تعطيني شوية ' + foodTranslations[foodName].lebanese + ' الزكية، بليييز!';
           lang = 'ar-LB';
           break;
+        case 'lebanese-apologetic':
+          sentence = 'جلالة الملكة، أعتذر بتواضع وأجرؤ على طلب ' + foodTranslations[foodName].lebanese + ' إذا كان يرضي التاج الكريم.';
+          lang = 'ar-LB';
+          break;
         case 'lebanese-rude':
           sentence = 'وين ' + foodTranslations[foodName].lebanese + ' تبع الله؟';
           lang = 'ar-LB';
@@ -293,6 +323,10 @@
           break;
         case 'french-silly':
           sentence = 'Est-ce que je peux avoir ' + foodTranslations[foodName].french + ' délicieux, s\'il vous plaît s\'il vous plaît?';
+          lang = 'fr-FR';
+          break;
+        case 'french-apologetic':
+          sentence = 'Votre Majesté, je m\'excuse humblement pour cette intrusion et ose demander ' + foodTranslations[foodName].french + ' s\'il plaît à la couronne.';
           lang = 'fr-FR';
           break;
         case 'french-rude':
@@ -311,6 +345,10 @@
           sentence = '¿Me das ' + foodTranslations[foodName].spanish + ' riquísimo, por favorcito por favorcito?';
           lang = 'es-ES';
           break;
+        case 'spanish-apologetic':
+          sentence = 'Su Majestad, me disculpo humildemente por esta intrusión y me atrevo a solicitar ' + foodTranslations[foodName].spanish + ' si place a la corona.';
+          lang = 'es-ES';
+          break;
         case 'spanish-rude':
           sentence = '¿Dónde coño está mi ' + foodTranslations[foodName].spanish + '?';
           lang = 'es-ES';
@@ -325,6 +363,10 @@
           break;
         case 'japanese-silly':
           sentence = 'おいしい' + foodTranslations[foodName].japanese + 'をお願いします〜！';
+          lang = 'ja-JP';
+          break;
+        case 'japanese-apologetic':
+          sentence = '陛下、この無礼をお許しください。恐れながら' + foodTranslations[foodName].japanese + 'をお願い申し上げます。';
           lang = 'ja-JP';
           break;
         case 'japanese-rude':
