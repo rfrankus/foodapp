@@ -68,6 +68,9 @@
         <input type="radio" name="language" value="english-nice" checked> 😊 Nice
       </label>
       <label>
+        <input type="radio" name="language" value="english-urgent"> 🚨 Urgent
+      </label>
+      <label>
         <input type="radio" name="language" value="english-rude"> 😠 Rude
       </label>
     </div>
@@ -76,6 +79,9 @@
       <strong title="German Language - Deutsch">🇩🇪 German:</strong>
       <label>
         <input type="radio" name="language" value="german-nice"> 😊 Höflich
+      </label>
+      <label>
+        <input type="radio" name="language" value="german-urgent"> 🚨 Dringend
       </label>
       <label>
         <input type="radio" name="language" value="german-rude"> 😠 Unhöflich
@@ -88,6 +94,9 @@
         <input type="radio" name="language" value="lebanese-nice"> 😊 مهذب
       </label>
       <label>
+        <input type="radio" name="language" value="lebanese-urgent"> 🚨 عاجل
+      </label>
+      <label>
         <input type="radio" name="language" value="lebanese-rude"> 😠 وقح
       </label>
     </div>
@@ -96,6 +105,9 @@
       <strong title="French Language - Français">🇫🇷 French:</strong>
       <label>
         <input type="radio" name="language" value="french-nice"> 😊 Poli
+      </label>
+      <label>
+        <input type="radio" name="language" value="french-urgent"> 🚨 Urgent
       </label>
       <label>
         <input type="radio" name="language" value="french-rude"> 😠 Grossier
@@ -108,6 +120,9 @@
         <input type="radio" name="language" value="spanish-nice"> 😊 Cortés
       </label>
       <label>
+        <input type="radio" name="language" value="spanish-urgent"> 🚨 Urgente
+      </label>
+      <label>
         <input type="radio" name="language" value="spanish-rude"> 😠 Grosero
       </label>
     </div>
@@ -116,6 +131,9 @@
       <strong title="Japanese Language - 日本語">🇯🇵 Japanese:</strong>
       <label>
         <input type="radio" name="language" value="japanese-nice"> 😊 丁寧
+      </label>
+      <label>
+        <input type="radio" name="language" value="japanese-urgent"> 🚨 緊急
       </label>
       <label>
         <input type="radio" name="language" value="japanese-rude"> 😠 失礼
@@ -203,12 +221,20 @@
           sentence = 'Can I please have some ' + foodName + '?';
           lang = 'en-US';
           break;
+        case 'english-urgent':
+          sentence = 'I need ' + foodName + ' right now!';
+          lang = 'en-US';
+          break;
         case 'english-rude':
           sentence = 'Where the fuck is my ' + foodName + '?';
           lang = 'en-US';
           break;
         case 'german-nice':
           sentence = 'Kann ich bitte etwas ' + foodTranslations[foodName].german + ' haben?';
+          lang = 'de-DE';
+          break;
+        case 'german-urgent':
+          sentence = 'Ich brauche sofort ' + foodTranslations[foodName].german + '!';
           lang = 'de-DE';
           break;
         case 'german-rude':
@@ -219,12 +245,20 @@
           sentence = 'فيني آخد شوية ' + foodTranslations[foodName].lebanese + ' لو سمحت؟';
           lang = 'ar-LB';
           break;
+        case 'lebanese-urgent':
+          sentence = 'بدي ' + foodTranslations[foodName].lebanese + ' هلأ!';
+          lang = 'ar-LB';
+          break;
         case 'lebanese-rude':
           sentence = 'وين ' + foodTranslations[foodName].lebanese + ' تبع الله؟';
           lang = 'ar-LB';
           break;
         case 'french-nice':
           sentence = 'Puis-je avoir ' + foodTranslations[foodName].french + ' s\'il vous plaît?';
+          lang = 'fr-FR';
+          break;
+        case 'french-urgent':
+          sentence = 'J\'ai besoin de ' + foodTranslations[foodName].french + ' tout de suite!';
           lang = 'fr-FR';
           break;
         case 'french-rude':
@@ -235,12 +269,20 @@
           sentence = '¿Puedo tener ' + foodTranslations[foodName].spanish + ' por favor?';
           lang = 'es-ES';
           break;
+        case 'spanish-urgent':
+          sentence = '¡Necesito ' + foodTranslations[foodName].spanish + ' ahora mismo!';
+          lang = 'es-ES';
+          break;
         case 'spanish-rude':
           sentence = '¿Dónde coño está mi ' + foodTranslations[foodName].spanish + '?';
           lang = 'es-ES';
           break;
         case 'japanese-nice':
           sentence = foodTranslations[foodName].japanese + 'をください。';
+          lang = 'ja-JP';
+          break;
+        case 'japanese-urgent':
+          sentence = foodTranslations[foodName].japanese + 'が今すぐ必要です！';
           lang = 'ja-JP';
           break;
         case 'japanese-rude':
