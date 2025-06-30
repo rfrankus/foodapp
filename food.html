@@ -54,6 +54,52 @@
       background-color: #ffdab9;
       transform: scale(1.1);
     }
+    .custom-food-section {
+      margin: 30px 0;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 15px;
+      border: 2px solid #ff69b4;
+    }
+    .custom-food-section h3 {
+      color: #ff69b4;
+      margin: 0 0 15px 0;
+    }
+    .custom-food-input {
+      font-size: 18px;
+      padding: 12px 15px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      margin-right: 10px;
+      width: 250px;
+      font-family: 'Comic Sans MS', cursive;
+    }
+    .custom-food-input:focus {
+      outline: none;
+      border-color: #ff69b4;
+    }
+    .custom-food-button {
+      font-size: 18px;
+      padding: 12px 20px;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: 'Comic Sans MS', cursive;
+      transition: transform 0.2s ease;
+    }
+    .custom-food-button:hover {
+      background-color: #ff1493;
+      transform: scale(1.05);
+    }
+    .preset-foods {
+      margin-top: 20px;
+    }
+    .preset-foods h3 {
+      color: #ff69b4;
+      margin-bottom: 15px;
+    }
   </style>
 </head>
 <body>
@@ -177,18 +223,27 @@
     </div>
   </div>
 
-  <button class="food-button" onclick="speakFood('Water')">💧 Water</button>
-  <button class="food-button" onclick="speakFood('Butter')">💧 Butter</button>
-  <button class="food-button" onclick="speakFood('Ice Cream')">🍦 Ice Cream</button>
-  <button class="food-button" onclick="speakFood('Protein Shake')">🥤 Protein Shake</button>
-  <button class="food-button" onclick="speakFood('Whip Cream')">🍨 Whip Cream</button>
-  <button class="food-button" onclick="speakFood('Yogurt')">🥣 Yogurt</button>
-  <button class="food-button" onclick="speakFood('Smoothie')">🫐 Smoothie</button>
-  <button class="food-button" onclick="speakFood('Chocolate Pudding')">🍫 Chocolate Pudding</button>
-  <button class="food-button" onclick="speakFood('Medicine')">💊 Medicine</button>
-  <button class="food-button" onclick="speakFood('Tequila')">🍹 Tequila</button>
-  <button class="food-button" onclick="speakFood('Mashed Potatoes')">🥔 Mashed Potatoes</button>
-  <button class="food-button" onclick="speakFood('Yakult')">🥛 Yakult</button>
+  <div class="custom-food-section">
+    <h3>🍽️ Custom Food Item:</h3>
+    <input type="text" id="customFood" placeholder="Enter any food item..." class="custom-food-input">
+    <button class="custom-food-button" onclick="speakCustomFood()">🗣️ Speak It!</button>
+  </div>
+
+  <div class="preset-foods">
+    <h3>🍴 Preset Foods:</h3>
+    <button class="food-button" onclick="speakFood('Water')">💧 Water</button>
+    <button class="food-button" onclick="speakFood('Butter')">💧 Butter</button>
+    <button class="food-button" onclick="speakFood('Ice Cream')">🍦 Ice Cream</button>
+    <button class="food-button" onclick="speakFood('Protein Shake')">🥤 Protein Shake</button>
+    <button class="food-button" onclick="speakFood('Whip Cream')">🍨 Whip Cream</button>
+    <button class="food-button" onclick="speakFood('Yogurt')">🥣 Yogurt</button>
+    <button class="food-button" onclick="speakFood('Smoothie')">🫐 Smoothie</button>
+    <button class="food-button" onclick="speakFood('Chocolate Pudding')">🍫 Chocolate Pudding</button>
+    <button class="food-button" onclick="speakFood('Medicine')">💊 Medicine</button>
+    <button class="food-button" onclick="speakFood('Tequila')">🍹 Tequila</button>
+    <button class="food-button" onclick="speakFood('Mashed Potatoes')">🥔 Mashed Potatoes</button>
+    <button class="food-button" onclick="speakFood('Yakult')">🥛 Yakult</button>
+  </div>
 
   <script>
     // Check available voices when page loads
@@ -426,6 +481,184 @@
       
       speechSynthesis.speak(utterance);
     }
+
+    function speakCustomFood() {
+      const customFoodInput = document.getElementById('customFood');
+      const customFoodName = customFoodInput.value.trim();
+      
+      if (!customFoodName) {
+        alert('Please enter a food item first!');
+        return;
+      }
+      
+      const languageChoice = document.querySelector('input[name="language"]:checked').value;
+      
+      let sentence;
+      let lang = 'en-US'; // Default language for speech synthesis
+      
+      // For custom foods, we'll use the English name in all languages but adapt the sentence structure
+      switch(languageChoice) {
+        case 'english-nice':
+          sentence = 'Can I please have some ' + customFoodName + '?';
+          lang = 'en-US';
+          break;
+        case 'english-urgent':
+          sentence = 'I need ' + customFoodName + ' right now!';
+          lang = 'en-US';
+          break;
+        case 'english-silly':
+          sentence = 'Pretty please with a cherry on top, can I have some yummy ' + customFoodName + '? Pleeeease!';
+          lang = 'en-US';
+          break;
+        case 'english-apologetic':
+          sentence = 'Your Majesty, I humbly apologize for this intrusion, but might I dare request some ' + customFoodName + ' if it pleases the crown?';
+          lang = 'en-US';
+          break;
+        case 'english-rude':
+          sentence = 'Where the fuck is my ' + customFoodName + '?';
+          lang = 'en-US';
+          break;
+        case 'german-nice':
+          sentence = 'Kann ich bitte etwas ' + customFoodName + ' haben?';
+          lang = 'de-DE';
+          break;
+        case 'german-urgent':
+          sentence = 'Ich brauche sofort ' + customFoodName + '!';
+          lang = 'de-DE';
+          break;
+        case 'german-silly':
+          sentence = 'Ich hätte gerne etwas leckeres ' + customFoodName + ', bitte bitte bitte!';
+          lang = 'de-DE';
+          break;
+        case 'german-apologetic':
+          sentence = 'Eure Majestät, ich bitte demütigst um Verzeihung und wage zu erbitten etwas ' + customFoodName + ', falls es der Krone gefällt.';
+          lang = 'de-DE';
+          break;
+        case 'german-rude':
+          sentence = 'Wo zum Teufel ist mein ' + customFoodName + '?';
+          lang = 'de-DE';
+          break;
+        case 'lebanese-nice':
+          sentence = 'فيني آخد شوية ' + customFoodName + ' لو سمحت؟';
+          lang = 'ar-LB';
+          break;
+        case 'lebanese-urgent':
+          sentence = 'بدي ' + customFoodName + ' هلأ!';
+          lang = 'ar-LB';
+          break;
+        case 'lebanese-silly':
+          sentence = 'يا ريت تعطيني شوية ' + customFoodName + ' الزكي، بليييز!';
+          lang = 'ar-LB';
+          break;
+        case 'lebanese-apologetic':
+          sentence = 'جلالة الملكة، أعتذر بتواضع وأجرؤ على طلب ' + customFoodName + ' إذا كان يرضي التاج الكريم.';
+          lang = 'ar-LB';
+          break;
+        case 'lebanese-rude':
+          sentence = 'وين ' + customFoodName + ' تبع الله؟';
+          lang = 'ar-LB';
+          break;
+        case 'french-nice':
+          sentence = 'Puis-je avoir ' + customFoodName + ' s\'il vous plaît?';
+          lang = 'fr-FR';
+          break;
+        case 'french-urgent':
+          sentence = 'J\'ai besoin de ' + customFoodName + ' tout de suite!';
+          lang = 'fr-FR';
+          break;
+        case 'french-silly':
+          sentence = 'Est-ce que je peux avoir ' + customFoodName + ' délicieux, s\'il vous plaît s\'il vous plaît?';
+          lang = 'fr-FR';
+          break;
+        case 'french-apologetic':
+          sentence = 'Votre Majesté, je m\'excuse humblement pour cette intrusion et ose demander ' + customFoodName + ' s\'il plaît à la couronne.';
+          lang = 'fr-FR';
+          break;
+        case 'french-rude':
+          sentence = 'Où est mon putain de ' + customFoodName + '?';
+          lang = 'fr-FR';
+          break;
+        case 'spanish-nice':
+          sentence = '¿Puedo tener ' + customFoodName + ' por favor?';
+          lang = 'es-ES';
+          break;
+        case 'spanish-urgent':
+          sentence = '¡Necesito ' + customFoodName + ' ahora mismo!';
+          lang = 'es-ES';
+          break;
+        case 'spanish-silly':
+          sentence = '¿Me das ' + customFoodName + ' riquísimo, por favorcito por favorcito?';
+          lang = 'es-ES';
+          break;
+        case 'spanish-apologetic':
+          sentence = 'Su Majestad, me disculpo humildemente por esta intrusión y me atrevo a solicitar ' + customFoodName + ' si place a la corona.';
+          lang = 'es-ES';
+          break;
+        case 'spanish-rude':
+          sentence = '¿Dónde coño está mi ' + customFoodName + '?';
+          lang = 'es-ES';
+          break;
+        case 'japanese-nice':
+          sentence = customFoodName + 'をください。';
+          lang = 'ja-JP';
+          break;
+        case 'japanese-urgent':
+          sentence = customFoodName + 'が今すぐ必要です！';
+          lang = 'ja-JP';
+          break;
+        case 'japanese-silly':
+          sentence = 'おいしい' + customFoodName + 'をお願いします〜！';
+          lang = 'ja-JP';
+          break;
+        case 'japanese-apologetic':
+          sentence = '陛下、この無礼をお許しください。恐れながら' + customFoodName + 'をお願い申し上げます。';
+          lang = 'ja-JP';
+          break;
+        case 'japanese-rude':
+          sentence = customFoodName + 'はどこだ？';
+          lang = 'ja-JP';
+          break;
+        default:
+          sentence = 'Can I please have some ' + customFoodName + '?';
+          lang = 'en-US';
+      }
+      
+      console.log('Speaking custom food:', sentence, 'in language:', lang);
+      
+      const utterance = new SpeechSynthesisUtterance(sentence);
+      utterance.lang = lang;
+      
+      // Try to find the best voice for the language
+      const voices = speechSynthesis.getVoices();
+      const targetVoice = voices.find(voice => voice.lang === lang) || 
+                         voices.find(voice => voice.lang.startsWith(lang.split('-')[0]));
+      
+      if (targetVoice) {
+        utterance.voice = targetVoice;
+        console.log('Using voice:', targetVoice.name, targetVoice.lang);
+      }
+      
+      // Add error handling
+      utterance.onerror = function(event) {
+        console.error('Speech synthesis error:', event.error);
+        alert('Speech synthesis failed: ' + event.error);
+      };
+      
+      speechSynthesis.speak(utterance);
+      
+      // Clear the input field after speaking
+      customFoodInput.value = '';
+    }
+
+    // Allow Enter key to trigger speaking
+    document.addEventListener('DOMContentLoaded', function() {
+      const customFoodInput = document.getElementById('customFood');
+      customFoodInput.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+          speakCustomFood();
+        }
+      });
+    });
   </script>
 </body>
 </html>
